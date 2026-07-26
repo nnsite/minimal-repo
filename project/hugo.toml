@@ -1,27 +1,8 @@
 baseURL = "http://localhost"
-title = "My New Hugo Project"
-defaultContentLanguage = "fr"
-
 disableKinds = ["taxonomy", "rss"]
-enableRobotsTXT = true
 disableHugoGeneratorInject = true
 
 [module]
 workspace = "../hugo.work"
-
 [[module.imports]]
 path = "essai.com/common-hugo-module"
-
-[languages]
-_merge = "deep"
-
-[languages.fr]
-_merge = "deep"
-label = "Français"
-
-[languages.en]
-_merge = "deep"
-label = "English"
-
-[params]
-_merge = "deep"
