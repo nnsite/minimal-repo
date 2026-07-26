@@ -1,0 +1,17 @@
+<!-- {{- if .Inner -}}{{- end -}} -->
+{{- $id := .Get 0 -}}
+{{- $group := printf "tabs-%s" $id -}}
+
+<figure aria-label="tabs">
+  {{- range $index, $tab := .Store.Get $group -}}
+    <label class="tab-label">
+      <input 
+        type="radio" 
+        name="{{- $group -}}" 
+        {{- if eq $index 0 -}}checked{{- end -}} 
+      />
+      {{- $tab.Name -}}
+    </label>
+      {{- $tab.Content | $.Page.RenderString -}}
+  {{- end -}}
+</figure>

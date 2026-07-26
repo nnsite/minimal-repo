@@ -1,0 +1,10 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'My New Hugo Project'
+
+disableKinds = ['taxonomy','rss']
+defaultContentLanguage = 'fr'
+enableRobotsTXT = true
+disableHugoGeneratorInject = true
+BaseURL = "http://localhost"
+workspace = "../hugo.work"

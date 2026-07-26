@@ -1,0 +1,65 @@
+{{ $.Page.Store.Set "glossaryPopovers" slice }}
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Name }}">
+<head>
+{{ partial "docs/head" .}}
+{{ block "more-head" .}}{{end}}
+</head>
+<body class="{{ block "class_body" . }}page-template-default page{{ end}}">
+<header id="header">
+<a href="{{ .Site.Home.Permalink }}" id="logo"></a>
+</header>
+<div id="header-mobile">
+<input type="checkbox" id="display-header">
+<a href="{{ .Site.Home.Permalink }}" id="logo-mobile"></a>
+</div>
+<div id=content class=wrapper>
+<nav id=main-nav>
+<ul id="menu-principal" class="menu">
+{{- range (append site.Home (.Site.GetPage "/docs/").Pages) }}
+<li><a href="{{ .RelPermalink }}" {{ if eq $.Page . }}aria-current="page"{{end}}>{{ .LinkTitle }}</a>
+</li>
+{{ end }}
+<li><ul>{{ range .AllTranslations }}
+<li class=lang-item>
+<a href={{ .Permalink }} {{with .Site.Language.Name}}hreflang={{.}} lang="{{.}}"{{ end }} {{ if eq $.Page . }}aria-current=page{{ end }}>
+<img src="{{.Site.Language.Params.flag}}" {{with .Site.Language.Label}}title="{{.}}" alt="{{.}}"{{ end }}/></a>
+</li>
+{{end}}</ul></li>
+</ul>
+</nav>
+<main id="page" class="page-content">
+{{ block "main" .}}
+<div class="post-ctt">
+<h1>{{ .Title }}</h1>
+{{.Content}}
+{{ block "after-content" .}}{{end}}
+</div>
+{{end}}
+</main>
+<footer id="footer">
+	{{- range $.Page.Store.Get "glossaryPopovers"  -}}
+	{{ $id := . }}
+	    <article id="{{.}}" popover="auto">
+	    {{ with site.GetPage . }}
+	    <header><h1>{{.Title}}</h1><button tabindex=0 popovertarget="{{ $id }}" popovertargetaction="toggle">❌</button></header>
+	    <section>{{.Content}}</section>
+	    <footer></footer>
+		{{- end -}}
+	    </article>
+	{{- end -}}
+	<div class="left">
+		{{ site.Title}}
+	</div>
+	<div class="glossaire-footer">
+		<a style="text-decoration:underline" href="{{ absURL "glossaire/" }}">
+			{{ T "consulter-glossary" }}
+		</a>
+	</div>
+	<div class="right">
+		{{now.Year}}
+	</div>
+</footer>
+</div>
+</body>
+</html>

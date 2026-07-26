@@ -1,0 +1,44 @@
+{{- $currentpage := . -}}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ .Site.Language.Name }}" lang="{{ .Site.Language.Locale }}">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{{ relURL "default.css" }}">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>{{ .Title }} ┆ {{ site.Title }}</title>
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:title" content="{{ .Title }}"/>
+{{- with .Description -}}
+<meta name="description" content="{{ . }}">
+<meta property="og:description" content="{{.}}"/>
+{{- end -}}
+<meta property="og:type" content="{{ if .IsHome }}website{{ else }}main{{ end }}"/>
+<meta property="og:url" content="{{ .RelPermalink }}"/>
+{{- if .IsPage -}}
+<meta property="main:modified_time" content="{{.Lastmod.Format  "Monday, 02/01/2006"}}" />
+{{ end }}
+</head>
+<body data-pagefind-body="data-pagefind-body">
+<header><nav>
+<a href="{{- .Site.Home.RelPermalink -}}" rel=home>{{- .Site.Title  -}}</a>
+<ul id=flags>{{ range .AllTranslations }}
+  <li class="lang-item">
+    <a href="{{ .RelPermalink }}"{{ with .Site.Language.Name }} hreflang="{{ . }}" lang="{{ . }}"{{ end }}>
+      <img src="{{ safeURL .Site.Params.flag }}" {{ with .Site.Language.Label }}title="{{ . }}"{{ end }}>
+    </a>
+  </li>
+{{ end }}
+</ul>
+{{- range .Site.Pages  -}}
+<a href="{{- .RelPermalink -}}" {{if eq . $currentpage}}aria-current="page"{{end}} >{{- .Title  -}}</a>{{- end -}}
+<label tabindex=0>{{ i18n "sites-internets"}}<input type="checkbox" /></label>
+<ul id=sites>{{- range .Site.Menus.main }}<li><a href="{{ .URL }}">{{ .Name }}</a></li> {{- end }}</ul>
+</nav></header>
+<main autofocus>
+{{ block "specific-content" . }}
+<h1>{{ .Page.Params.Title }}</h1>
+{{ end }}
+{{- .Content }}
+</main>
+</body>
+</html>

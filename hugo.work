@@ -1,0 +1,6 @@
+*go 1.19
+
+use .
+use common-hugo-module
+use ./common-hugo-module
+use ../common-hugo-module

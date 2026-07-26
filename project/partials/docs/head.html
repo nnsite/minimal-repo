@@ -1,0 +1,27 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>{{.Title}} - {{T "subtitle2"}}</title>
+<meta name="description" content="{{.Description}}" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="{{.Permalink}}" />
+<link rel="preload" href="{{ relURL "home-video.mp4" }}" type="video/mp4" as=image />
+<meta property="og:locale" content="{{ .Site.Language.Label }}" />
+{{ range .Translations}}
+<meta property="og:locale:alternate" content="{{ .Site.Language.Label }}"/>
+{{end}}
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{.Title}} - {{T "subtitle"}}" />
+<meta property="og:description" content="{{.Description}}" />
+<meta property="og:url" content="{{.Permalink }}"/>
+<meta property="og:site_name" content="{{T "subtitle"}}" />
+<meta property="article:modified_time" content="{{.Lastmod.Format "2006-01-02T15:04:05Z0700"}}" />
+{{- with .Page.Params.images -}}
+{{ $resource := (resources.Get (index . 0)).RelPermalink}}
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="{{$resource}}"/>
+<meta property="og:image" content="{{$resource}}" />
+{{- end }}
+<link rel='stylesheet'  href="{{ absURL "default.css" }}" type='text/css' />
+{{ range .AllTranslations }}
+<link rel="alternate" href="{{ .RelPermalink }}" hreflang="{{ .Site.Language.Name }}" />
+{{ end }}

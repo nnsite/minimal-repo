@@ -1,0 +1,18 @@
+{{ define "class_body"}}
+archive post-type-archive post-type-archive-glossaire
+{{ end}}
+{{ define "main"}}
+<article class="page-post">
+<h1>{{i18n "glossary"}}</h1>
+{{ range .Pages}}
+<div class="post-ctt">
+<h2>{{.Title }}</h2>
+<p>{{.Summary}}</p>
+<a href={{.RelPermalink}} class="read-more" href="{{.RelPermalink}}">{{i18n "read-more"}}</a>
+</div>
+{{ end }}
+</article>
+<nav class="article-nav">
+</nav>
+{{end}}
+

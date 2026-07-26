@@ -1,0 +1,12 @@
+{{- $isRemote := strings.Contains .Destination "://" -}}
+{{- if $isRemote -}}
+<a href="{{ .Destination }}">{{ .Text }}</a>
+{{- else -}}
+  {{- $page := site.GetPage (urls.Parse .Destination).Path -}}
+  {{- if eq $page.Section "glossaire" -}}
+    <button popovertarget="{{ .Destination }}" popovertargetaction="toggle"><span tabindex=0>{{ .Text }}</span></button>
+    {{- $.Page.Store.Add "glossaryPopovers" .Destination -}}
+  {{- else -}}
+    <a href="{{ $page.Permalink }}">{{ .Text }}</a>
+  {{- end -}}
+{{- end -}}
