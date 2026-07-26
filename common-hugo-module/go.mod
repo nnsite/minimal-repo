@@ -1,3 +1,3 @@
-module common-hugo-module
+module essai.com/common-hugo-module
 
-go 1.26.5
+go 1.26

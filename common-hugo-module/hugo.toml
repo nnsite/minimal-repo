@@ -1,10 +1,10 @@
-[Params]
+[params]
 domain = "https://guyclaude-burger.codeberg.page/"
 
 [languages]
    _merge = 'deep'
   [languages.en]
-    Label = "English"
+    Label = "AAAAA"
     Locale = "en-US"
     Name = "en"
 

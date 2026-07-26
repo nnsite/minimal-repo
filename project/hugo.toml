@@ -7,4 +7,16 @@ defaultContentLanguage = 'fr'
 enableRobotsTXT = true
 disableHugoGeneratorInject = true
 BaseURL = "http://localhost"
+
+[module]
 workspace = "../hugo.work"
+
+[[module.imports]]
+path = "essai.com/common-hugo-module"
+
+
+[languages]
+_merge = "deep"
+
+[languages.fr]
+_merge = "deep"

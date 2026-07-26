@@ -1,6 +1,4 @@
-*go 1.19
+go 1.26
 
-use .
-use common-hugo-module
+use ./project
 use ./common-hugo-module
-use ../common-hugo-module
